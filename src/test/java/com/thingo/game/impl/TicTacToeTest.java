@@ -19,10 +19,10 @@ public class TicTacToeTest {
     public void shouldBeStartable() {
         Game game = new TicTacToe();
         game = game.start();
-        assertGameHasStated(game);
+        assertGameHasStarted(game);
     }
 
-    private void assertGameHasStated(Game game) {
+    private void assertGameHasStarted(Game game) {
         assertTrue("Game not started", false);
     }
 }

@@ -5,7 +5,11 @@ import com.thingo.game.Game;
 public class TicTacToe implements Game {
 
     @Override
-    public Game start() {
+    public TicTacToe start() {
         return this;
+    }
+
+    public boolean started() {
+        return true;
     }
 }

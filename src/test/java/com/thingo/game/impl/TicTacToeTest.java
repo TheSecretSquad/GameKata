@@ -17,12 +17,13 @@ public class TicTacToeTest {
 
     @Test
     public void shouldBeStartable() {
-        Game game = new TicTacToe();
+        FakePlayers players = new FakePlayers();
+        Game game = new TicTacToe(players);
         game = game.start();
-        assertGameHasStated(game);
+        assertGameHasStarted(players);
     }
 
-    private void assertGameHasStated(Game game) {
-        assertTrue("Game not started", false);
+    private void assertGameHasStarted(FakePlayers players) {
+        assertTrue(players.hasStartedPlaying());
     }
 }

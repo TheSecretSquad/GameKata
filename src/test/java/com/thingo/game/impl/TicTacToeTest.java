@@ -1,9 +1,9 @@
 package com.thingo.game.impl;
 
 import com.thingo.game.Game;
+import com.thingo.game.Players;
 import org.junit.Test;
-
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 public class TicTacToeTest {
 
@@ -17,12 +17,13 @@ public class TicTacToeTest {
 
     @Test
     public void shouldBeStartable() {
-        Game game = new TicTacToe();
+        Players players = mock(Players.class);
+        Game game = new TicTacToe(players);
         game = game.start();
-        assertGameHasStated(game);
+        assertGameHasStarted(players);
     }
 
-    private void assertGameHasStated(Game game) {
-        assertTrue("Game not started", false);
+    private void assertGameHasStarted(Players players) {
+        verify(players, times(1)).start();
     }
 }

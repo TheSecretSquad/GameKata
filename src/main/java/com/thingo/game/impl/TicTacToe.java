@@ -13,7 +13,7 @@ public class TicTacToe implements Game {
 
     @Override
     public Game start() {
-        gameListener.start(this);
+        gameListener.started(this);
         return this;
     }
 }

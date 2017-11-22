@@ -2,5 +2,5 @@ package com.thingo.game;
 
 public interface GameListener {
 
-    GameListener start(Game game);
+    GameListener started(Game game);
 }

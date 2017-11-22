@@ -29,6 +29,6 @@ public class TicTacToeTest {
     }
 
     private void assertGameHasStarted(Game game, GameListener gameListener) {
-        verify(gameListener, times(1)).start(eq(game));
+        verify(gameListener, times(1)).started(eq(game));
     }
 }

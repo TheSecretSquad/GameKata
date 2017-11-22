@@ -1,9 +1,14 @@
 package com.thingo.game.impl;
 
 import com.thingo.game.Game;
+import com.thingo.game.GameListener;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.mockito.ArgumentMatchers.eq;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import static org.mockito.Mockito.mock;
 
 public class TicTacToeTest {
 
@@ -17,12 +22,13 @@ public class TicTacToeTest {
 
     @Test
     public void shouldBeStartable() {
-        Game game = new TicTacToe();
+        GameListener gameListener = mock(GameListener.class);
+        Game game = new TicTacToe(gameListener);
         game = game.start();
-        assertGameHasStated(game);
+        assertGameHasStarted(game, gameListener);
     }
 
-    private void assertGameHasStated(Game game) {
-        assertTrue("Game not started", false);
+    private void assertGameHasStarted(Game game, GameListener gameListener) {
+        verify(gameListener, times(1)).start(eq(game));
     }
 }

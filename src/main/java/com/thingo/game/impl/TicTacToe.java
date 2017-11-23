@@ -16,4 +16,10 @@ class TicTacToe implements Game {
         gameListener.started(this);
         return this;
     }
+
+    @Override
+    public Game stop() {
+        gameListener.stopped(this);
+        return this;
+    }
 }

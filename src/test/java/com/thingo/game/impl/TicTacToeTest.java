@@ -18,7 +18,7 @@ public class TicTacToeTest {
     // Read the items below as "The Class Under Test 'Game' ..."
 
     // shouldBeStartable
-    // shouldBeStopable
+    // shouldBeStoppable
 
     @Test
     public void shouldBeStartable() {
@@ -28,7 +28,20 @@ public class TicTacToeTest {
         assertGameHasStarted(game, gameListener);
     }
 
+    @Test
+    public void shouldBeStoppable() {
+        GameListener gameListener = mock(GameListener.class);
+        Game game = new TicTacToe(gameListener);
+        game = game.start()
+                   .stop();
+        assertGameHasStopped(game, gameListener);
+    }
+
     private void assertGameHasStarted(Game game, GameListener gameListener) {
         verify(gameListener, times(1)).started(eq(game));
+    }
+
+    private void assertGameHasStopped(Game game, GameListener gameListener) {
+        verify(gameListener, times(1)).stopped(eq(game));
     }
 }

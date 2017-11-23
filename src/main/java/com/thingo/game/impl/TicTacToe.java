@@ -3,7 +3,7 @@ package com.thingo.game.impl;
 import com.thingo.game.Game;
 import com.thingo.game.GameListener;
 
-public class TicTacToe implements Game {
+class TicTacToe implements Game {
 
     private final GameListener gameListener;
 

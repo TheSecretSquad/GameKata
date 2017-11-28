@@ -5,10 +5,7 @@ import com.thingo.game.GameListener;
 import org.junit.Test;
 
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-
-import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.*;
 
 public class TicTacToeTest {
 
@@ -28,6 +25,13 @@ public class TicTacToeTest {
         assertGameHasStarted(game, gameListener);
     }
 
+    @Test(expected = RuntimeException.class)
+    public void ifAlreadyStartedShouldNotBeStartable() {
+        GameListener gameListener = mock(GameListener.class);
+        Game game = new TicTacToe(gameListener);
+        game = game.start().start();
+    }
+
     @Test
     public void shouldBeStoppable() {
         GameListener gameListener = mock(GameListener.class);
@@ -35,6 +39,20 @@ public class TicTacToeTest {
         game = game.start()
                    .stop();
         assertGameHasStopped(game, gameListener);
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void ifNeverStartedShouldNotBeStoppable() {
+        GameListener gameListener = mock(GameListener.class);
+        Game game = new TicTacToe(gameListener);
+        game = game.stop();
+    }
+
+    @Test(expected = RuntimeException.class)
+    public void ifAlreadyStoppedShouldNotBeStoppable() {
+        GameListener gameListener = mock(GameListener.class);
+        Game game = new TicTacToe(gameListener);
+        game = game.start().stop().stop();
     }
 
     private void assertGameHasStarted(Game game, GameListener gameListener) {

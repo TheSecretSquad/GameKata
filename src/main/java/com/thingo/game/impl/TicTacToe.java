@@ -6,46 +6,54 @@ import com.thingo.game.GameListener;
 class TicTacToe implements Game {
 
     private final GameListener gameListener;
-    private boolean started;
+    private State state;
 
     public TicTacToe(GameListener gameListener) {
         this.gameListener = gameListener;
-        this.started = false;
+        this.state = new TicTacToeInitialState();
     }
 
     @Override
     public Game start() {
-        if (isStarted()) {
-            throw new RuntimeException("Game is already started.");
-        }
-        startGame();
-        return this;
-    }
-
-    private void startGame() {
-        started = true;
+        state = state.start();
         gameListener.started(this);
-    }
-
-    private boolean isStarted() {
-        return started;
+        return this;
     }
 
     @Override
     public Game stop() {
-        if (isStopped()) {
-            throw new RuntimeException("Game is already stopped.");
-        }
-        stopGame();
+        state = state.stop();
+        gameListener.stopped(this);
         return this;
     }
 
-    private void stopGame() {
-        started = false;
-        gameListener.stopped(this);
+    private interface State {
+        State start();
+
+        State stop();
     }
 
-    private boolean isStopped() {
-        return !isStarted();
+    private class TicTacToeInitialState implements State {
+        @Override
+        public State start() {
+            return new TicTacToeStartedState();
+        }
+
+        @Override
+        public State stop() {
+            throw new RuntimeException("Game has not started");
+        }
+    }
+
+    private class TicTacToeStartedState implements State {
+        @Override
+        public State start() {
+            throw new RuntimeException("Game already started");
+        }
+
+        @Override
+        public State stop() {
+            return new TicTacToeInitialState();
+        }
     }
 }
